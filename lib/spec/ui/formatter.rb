@@ -1,3 +1,4 @@
+require 'spec/runner/formatter/html_formatter'
 require 'spec/ui/screenshot_saver'
 require 'stringio'
 

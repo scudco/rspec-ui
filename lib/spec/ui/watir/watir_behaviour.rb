@@ -3,7 +3,7 @@ require 'spec/ui/watir/matchers'
 module Spec
   module Ui
     module Watir
-      class WatirBehaviour < Spec::DSL::Behaviour
+      class WatirBehaviour < Spec::Example::ExampleGroup
         def before_eval # :nodoc:
           include Spec::Matchers::Watir
           begin
@@ -17,7 +17,7 @@ module Spec
           end
         end
 
-        Spec::DSL::BehaviourFactory.add_behaviour_class(:watir, self)
+        Spec::Example::ExampleGroupFactory.register(:watir, self)
       end
     end
   end
