@@ -12,6 +12,7 @@ module Spec
       include ScreenshotSaver
 
       def initialize(options, where)
+        File.mkdir_p(File.dirname(where)) unless File.directory?(File.dirname(where))
         super
         if where.is_a?(String)
           @root = File.dirname(where)
