@@ -3,6 +3,10 @@ require 'rubygems'
 if RUBY_PLATFORM =~ /darwin/
   require 'safariwatir'
   Watir::Browser = Watir::Safari
+elsif RUBY_PLATFORM =~ /linux/
+  require 'firewatir'
+  Watir = FireWatir
+  Watir::Browser = FireWatir::Firefox
 else
   require 'watir'
   Watir::Browser = Watir::IE

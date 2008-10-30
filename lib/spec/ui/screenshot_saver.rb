@@ -8,6 +8,11 @@ module Spec
           # How do we capture the current window??
           `screencapture #{png_path}`
         end
+      elsif RUBY_PLATFORM =~ /linux/
+        def save_screenshot(png_path)
+          # How do we capture the current window??
+          `scrot #{png_path}`
+        end
       else # Win32
         begin
           # TODO: Move all this code to win32screenshot
