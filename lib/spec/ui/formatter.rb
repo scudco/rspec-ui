@@ -12,10 +12,10 @@ module Spec
       include ScreenshotSaver
 
       def initialize(options, where)
-        FileUtils.mkdir_p(File.dirname(where)) unless File.directory?(File.dirname(where))
         super
         if where.is_a?(String)
           @root = File.dirname(where)
+          ensure_dir(where)
         else
           raise "#{self.class} must write to a file, so that we know where to store screenshots"
         end
@@ -56,7 +56,7 @@ module Spec
       end
 
       def relative_png_path
-        "images/#{current_example_number}.png"
+        "images/#{example_number}.png"
       end
 
       def absolute_html_path
@@ -64,7 +64,7 @@ module Spec
       end
 
       def relative_html_path
-        "html/#{current_example_number}.html"
+        "html/#{example_number}.html"
       end
 
       def global_scripts
@@ -129,7 +129,7 @@ EOF
           result += img_div 
         end
         if File.exist?(absolute_html_path)
-          source_id = "#{current_example_number}_source"
+          source_id = "#{example_number}_source"
           result += "        <div>[<a id=\"l_#{source_id}\" href=\"javascript:toggleSource('#{source_id}')\">show snapshot</a>]</div>\n"
           result += "        <div id=\"#{source_id}\" class=\"dyn-source\"><iframe src=\"#{relative_html_path}\" width=\"100%\" height=\"300px\"></iframe></div>\n"
         end
