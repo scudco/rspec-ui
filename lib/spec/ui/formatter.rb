@@ -12,10 +12,10 @@ module Spec
       include ScreenshotSaver
 
       def initialize(options, where)
-        super
         if where.is_a?(String)
           @root = File.dirname(where)
           ensure_dir(where)
+          super
         else
           raise "#{self.class} must write to a file, so that we know where to store screenshots"
         end
@@ -35,20 +35,24 @@ module Spec
       # Takes a screenshot of the current window and saves it to disk. 
       # Use this method when you don't have a browser object.
       def screenshot
-        png_path = File.join(@root, relative_png_path)
-        ensure_dir(png_path)
-        save_screenshot(png_path)
+        ensure_dir!(absolute_png_path)
+        save_screenshot(absolute_png_path)
       end
       
       # Writes the HTML from +browser+ to disk
       def save_html(browser)
-        ensure_dir(absolute_html_path)
+        ensure_dir!(absolute_html_path)
         File.open(absolute_html_path, "w") {|io| io.write(browser.html)}
       end
       
       def ensure_dir(file)
         dir = File.dirname(file)
         FileUtils.mkdir_p(dir) unless File.directory?(dir)
+      end
+
+      def ensure_dir!(file)
+        dir = File.dirname(file)
+        FileUtils.mkdir_p(dir)
       end
 
       def absolute_png_path
