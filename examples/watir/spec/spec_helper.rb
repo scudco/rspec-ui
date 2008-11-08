@@ -7,6 +7,7 @@ require 'spec/ui'
 require 'spec/ui/watir'
 
 Spec::Runner.configure do |config|
+  include Spec::Matchers::Watir
   config.before(:all) do
     @browser = Watir::Browser.new
   end
