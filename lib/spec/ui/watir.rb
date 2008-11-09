@@ -1,2 +1,5 @@
-require 'spec/ui/watir/browser'
 require 'spec/ui/watir/matchers'
+
+Spec::Runner.configure do |config|
+  include Spec::Matchers::Watir
+end

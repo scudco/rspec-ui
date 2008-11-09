@@ -6,8 +6,19 @@ require 'spec'
 require 'spec/ui'
 require 'spec/ui/watir'
 
+if RUBY_PLATFORM =~ /darwin/
+  require 'safariwatir'
+  Watir::Browser = Watir::Safari
+elsif RUBY_PLATFORM =~ /linux/
+  require 'firewatir'
+  Watir = FireWatir
+  Watir::Browser = FireWatir::Firefox
+else
+  require 'watir'
+  Watir::Browser = Watir::IE
+end
+
 Spec::Runner.configure do |config|
-  include Spec::Matchers::Watir
   config.before(:all) do
     @browser = Watir::Browser.new
   end
@@ -17,6 +28,7 @@ Spec::Runner.configure do |config|
   end
 
   config.after(:all) do
-    @browser.kill!
+    @browser.close
+    sleep 5.5 # WTF apple throws an OS 609 Error unless we sleep for some arbitrary(okay maybe not) time
   end
 end
