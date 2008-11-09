@@ -28,8 +28,8 @@ module Spec
       # when this method is used.
       # This method *must* be called in an after(:each) block.
       def take_screenshot_of(browser)
-        screenshot
         save_html(browser)
+        screenshot
       end
       
       # Takes a screenshot of the current window and saves it to disk. 
