@@ -21,9 +21,7 @@ lib/spec/ui/selenium.rb
 lib/spec/ui/selenium/driver_ext.rb
 lib/spec/ui/version.rb
 lib/spec/ui/watir.rb
-lib/spec/ui/watir/browser.rb
 lib/spec/ui/watir/matchers.rb
-lib/spec/ui/watir/watir_behaviour.rb
 spec/spec.opts
 spec/spec/ui/watir/matchers_spec.rb
 spec/spec_helper.rb
